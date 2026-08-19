@@ -54,7 +54,7 @@ function setupDatabase() {
   const settingsSheet = ss.getSheetByName('SETTINGS');
   if (settingsSheet.getLastRow() === 1) {
     settingsSheet.appendRow(['namaSekolah', 'MIN 3 MADIUN']);
-    settingsSheet.appendRow(['namaKelas', 'Kelas 5A']);
+    settingsSheet.appendRow(['namaKelas', 'Kelas 1A']);
     settingsSheet.appendRow(['tahunAjaran', '2026/2027']);
     settingsSheet.appendRow(['semester', 'Semester 1 (Ganjil)']);
     settingsSheet.appendRow(['logoUrl', '']);
@@ -257,7 +257,7 @@ function saveAttendanceData(dataList) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('ATTENDANCE');
   dataList.forEach(item => {
     sheet.appendRow([
-      Date.now(), item.date, item.nisn, item.name, '5A', item.status, item.ket
+      Date.now(), item.date, item.nisn, item.name, '1A', item.status, item.ket
     ]);
   });
   return { success: true, message: 'Presensi berhasil dicatat' };
