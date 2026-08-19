@@ -1,0 +1,66 @@
+﻿Panduan Pemasangan Aplikasi Wali Kelas MIN 3 Madiun
+Dokumen ini berisi panduan langkah demi langkah untuk mengunggah dan mengintegrasikan Aplikasi Wali Kelas MIN 3 Madiun ke GitHub Pages, Google Apps Script (GAS), Google Sheets, dan Blogger.
+1. Persiapan Google Sheets & Google Apps Script (Backend)
+1. Buat Google Sheets Baru:
+   * Buka Google Sheets.
+   * Buat spreadsheet baru dan beri nama "DB Wali Kelas MIN 3 Madiun".
+2. Buka Apps Script:
+   * Pada menu atas Google Sheets, klik Ekstensi > Apps Script.
+3. Salin Kode Backend:
+   * Hapus semua kode default di Code.gs.
+   * Salin dan tempel seluruh isi dari file Code.gs ke editor Apps Script.
+4. Jalankan Inisialisasi Database:
+   * Pilih fungsi setupDatabase pada dropdown fungsi di bagian atas editor.
+   * Klik tombol Run / Jalankan.
+   * Berikan izin akses (Authorization) saat diminta.
+   * Periksa spreadsheet Anda, seluruh sheet (SETTINGS, USERS, STUDENTS, SCHEDULES, ATTENDANCE, ANNOUNCEMENTS, MESSAGES, DOCUMENTS) akan otomatis terbuat beserta header kolomnya.
+5. Deploy Web App:
+   * Klik tombol Deploy di pojok kanan atas > Deployment baru.
+   * Pilih jenis deployment: Aplikasi Web (Web App).
+   * Isikan deskripsi: Versi 1.0.
+   * Jalankan sebagai: Saya (Email Anda).
+   * Yang memiliki akses: Siapa saja (Anyone).
+   * Klik Deploy.
+   * Salin URL Aplikasi Web (Web App URL).
+2. Pengaturan Frontend & GitHub Pages
+1. Konfigurasi URL Backend:
+   * Buka file index.html.
+   * Cari baris:
+const GAS_URL = "URL_DEPLOY_GAS_ANDA_DISINI";
+
+   * Ganti URL_DEPLOY_GAS_ANDA_DISINI dengan URL Aplikasi Web yang telah Anda salin dari Google Apps Script.
+   * Jika ingin menghubungkan ke database live, ubah const IS_PREVIEW = true; menjadi false;.
+   2. Unggah ke GitHub:
+   * Buat repositori baru di GitHub (misal: wali-kelas-min3madiun).
+   * Unggah file index.html, Code.gs, dan README.md ke dalam repositori tersebut.
+   3. Aktifkan GitHub Pages:
+   * Masuk ke tab Settings repositori GitHub Anda.
+   * Buka menu Pages di bilah kiri.
+   * Pada bagian Build and deployment > Branch, pilih main atau master branch dan folder / (root).
+   * Klik Save.
+   * Tunggu beberapa saat, link webapp Anda akan aktif di https://username.github.io/wali-kelas-min3madiun/.
+3. Pemasangan di Blogger (Opsional)
+Aplikasi ini mendukung tampilan Full Page Overlay di Blogger tanpa perlu mengubah skema XML template.
+   1. Buka dashboard Blogger Anda.
+   2. Buat Halaman Baru (atau Posting Baru).
+   3. Ubah mode editor dari Compose View ke HTML View.
+   4. Tempelkan seluruh isi file index.html ke dalam editor HTML Blogger.
+   5. Klik Publikasikan.
+4. Akun Akses Default Aplikasi
+   * Guru Wali Kelas (Admin):
+   * Username: admin
+   * Password: admin@123
+   * Hak Akses: Akses penuh ke seluruh menu (Buku Induk, Presensi Harian, Kelola Jadwal, Pengumuman, Chat All, Folder Berkas All, Pengaturan & Cetak Rekap).
+   * Wali Murid Siswa (Member):
+   * Username: NISN Siswa (Contoh: 1234567890)
+   * Password: NISN Siswa (Sama dengan Username NISN)
+   * Privasi Terisolasi: Hanya dapat melihat data anak kandungnya sendiri, rekap kehadiran anak, folder berkas khusus anak, dan chat langsung ke Guru Wali.
+5. Struktur Penyimpanan File di Google Drive
+Ketika terhubung ke Google Apps Script, dokumen yang diunggah oleh Wali Murid atau Guru akan tersimpan rapi secara otomatis di Google Drive dengan struktur folder sebagai berikut:
+Google Drive
+└── Arsip Berkas MIN 3 Madiun
+   ├── [1234567890] - Ahmad Fauzi
+   │   ├── KK_AhmadFauzi.pdf
+   │   └── Akta_AhmadFauzi.jpg
+   └── [1234567891] - Anisa Nur Rahma
+       └── KK_Anisa.pdf
