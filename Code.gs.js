@@ -63,7 +63,7 @@ function setupDatabase() {
   // Insert default admin if USERS is empty
   const userSheet = ss.getSheetByName('USERS');
   if (userSheet.getLastRow() === 1) {
-    userSheet.appendRow(['USR-001', 'admin', 'admin@123', 'admin', 'Guru Wali Kelas 5A', '', 'AKTIF']);
+    userSheet.appendRow(['USR-001', 'admin', 'admin@123', 'admin', 'Guru Wali Kelas 1A', '', 'AKTIF']);
   }
 
   return "Setup Database Selesai dan Berhasil!";
