@@ -1,5 +1,4 @@
 /**
- * STREAMING_CHUNK:Initializing Google Apps Script Database Setup Routine...
  * Menyiapkan Spreadsheet & Sheet Otomatis
  * Jalankan fungsi setupDatabase() pertama kali dari Editor Apps Script
  */
@@ -41,7 +40,7 @@ function setupDatabase() {
     }
   ];
 
-  sheets.forEach(sh => {
+  sheets.forEach(function(sh) {
     let sheet = ss.getSheetByName(sh.name);
     if (!sheet) {
       sheet = ss.insertSheet(sh.name);
@@ -54,7 +53,7 @@ function setupDatabase() {
   const settingsSheet = ss.getSheetByName('SETTINGS');
   if (settingsSheet.getLastRow() === 1) {
     settingsSheet.appendRow(['namaSekolah', 'MIN 3 MADIUN']);
-    settingsSheet.appendRow(['namaKelas', 'Kelas 1A']);
+    settingsSheet.appendRow(['namaKelas', 'Kelas Program']);
     settingsSheet.appendRow(['tahunAjaran', '2026/2027']);
     settingsSheet.appendRow(['semester', 'Semester 1 (Ganjil)']);
     settingsSheet.appendRow(['logoUrl', '']);
@@ -63,15 +62,18 @@ function setupDatabase() {
   // Insert default admin if USERS is empty
   const userSheet = ss.getSheetByName('USERS');
   if (userSheet.getLastRow() === 1) {
-    userSheet.appendRow(['USR-001', 'admin', 'admin@123', 'admin', 'Guru Wali Kelas 1A', '', 'AKTIF']);
+    userSheet.appendRow(['USR-001', 'admin', 'admin@123', 'admin', 'Guru Wali Kelas Program', '', 'AKTIF']);
   }
 
   return "Setup Database Selesai dan Berhasil!";
 }
 
-/**
- * STREAMING_CHUNK:Processing Login with Auto NISN Verification...
- */
+function doGet(e) {
+  return HtmlService.createHtmlOutputFromFile('index')
+    .setTitle('Aplikasi Wali Kelas MIN 3 Madiun')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
 function processLogin(username, password) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const userSheet = ss.getSheetByName('USERS');
@@ -118,9 +120,6 @@ function processLogin(username, password) {
   return { success: false, message: 'Login gagal! NISN atau password tidak cocok.' };
 }
 
-/**
- * STREAMING_CHUNK:Managing File Storage with Folder Separation per Student...
- */
 function saveDocumentData(data) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const sheet = ss.getSheetByName('DOCUMENTS');
@@ -151,7 +150,7 @@ function saveDocumentData(data) {
     data.namaSiswa, 
     data.jenis, 
     data.namaFile, 
-    data.fileData, 
+    data.fileData || '', 
     data.sizeKb, 
     data.date,
     studentFolder.getUrl()
@@ -164,9 +163,6 @@ function saveDocumentData(data) {
   };
 }
 
-/**
- * STREAMING_CHUNK:Handling API HTTP POST Requests...
- */
 function doPost(e) {
   try {
     const contents = JSON.parse(e.postData.contents);
@@ -189,6 +185,8 @@ function doPost(e) {
       result = saveMessageData(contents.data);
     } else if (action === 'UPLOAD_DOCUMENT') {
       result = saveDocumentData(contents.data);
+    } else if (action === 'SAVE_ANNOUNCEMENT') {
+      result = saveAnnouncementData(contents.data);
     }
 
     return ContentService.createTextOutput(JSON.stringify(result))
@@ -197,6 +195,14 @@ function doPost(e) {
     return ContentService.createTextOutput(JSON.stringify({ success: false, error: error.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
   }
+}
+
+function saveAnnouncementData(data) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('ANNOUNCEMENTS');
+  sheet.appendRow([
+    data.id, data.tanggal, data.judul, data.isi, data.kategori, data.penulis
+  ]);
+  return { success: true, message: 'Pengumuman berhasil tersimpan' };
 }
 
 function getAllMasterData() {
@@ -217,9 +223,9 @@ function getSheetDataAsObjects(sheet) {
   const rows = sheet.getDataRange().getValues();
   if (rows.length <= 1) return [];
   const headers = rows[0];
-  return rows.slice(1).map(row => {
+  return rows.slice(1).map(function(row) {
     let obj = {};
-    headers.forEach((h, idx) => {
+    headers.forEach(function(h, idx) {
       obj[h] = row[idx];
     });
     return obj;
@@ -230,7 +236,7 @@ function saveSettingsData(data) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('SETTINGS');
   sheet.clearContents();
   sheet.appendRow(['key', 'value']);
-  Object.keys(data).forEach(k => {
+  Object.keys(data).forEach(function(k) {
     sheet.appendRow([k, data[k]]);
   });
   return { success: true, message: 'Pengaturan sekolah berhasil disimpan' };
@@ -255,9 +261,9 @@ function saveScheduleData(data) {
 
 function saveAttendanceData(dataList) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('ATTENDANCE');
-  dataList.forEach(item => {
+  dataList.forEach(function(item) {
     sheet.appendRow([
-      Date.now(), item.date, item.nisn, item.name, '1A', item.status, item.ket
+      Date.now(), item.date, item.nisn, item.name, 'Kelas Program', item.status, item.ket
     ]);
   });
   return { success: true, message: 'Presensi berhasil dicatat' };
