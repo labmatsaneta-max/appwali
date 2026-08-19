@@ -152,61 +152,58 @@
                 </div>
             </div>
 
-            <!-- Running Text Marquee -->
-            <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 flex items-center gap-3 text-amber-800 text-xs md:text-sm shadow-sm">
-                <span class="bg-amber-500 text-white font-bold px-2.5 py-1 rounded-lg shrink-0 text-xs uppercase flex items-center gap-1">
-                    <i class="fa-solid fa-bullhorn"></i> Info
-                </span>
-                <marquee class="font-medium" id="marquee-text">
-                    Selamat datang di tahun ajaran baru! Silakan lakukan pemutakhiran berkas siswa pada menu Portal Wali Murid.
-                </marquee>
-            </div>
-
-            <!-- Public Schedule Section -->
-            <div id="jadwal-public" class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
-                <div class="flex items-center justify-between mb-4">
-                    <div>
-                        <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
-                            <i class="fa-solid fa-calendar-days text-brand-600"></i> Jadwal Pelajaran Kelas
-                        </h3>
-                        <p class="text-xs text-slate-500">Jadwal kegiatan belajar mengajar harian siswa</p>
-                    </div>
-                    <select id="public-day-select" onchange="renderPublicSchedule(this.value)" class="text-xs bg-slate-100 border border-slate-300 rounded-lg px-3 py-1.5 font-semibold text-slate-700">
-                        <option value="Senin">Senin</option>
-                        <option value="Selasa">Selasa</option>
-                        <option value="Rabu">Rabu</option>
-                        <option value="Kamis">Kamis</option>
-                        <option value="Jumat">Jumat</option>
-                        <option value="Sabtu">Sabtu</option>
-                    </select>
-                </div>
+            <!-- Side-by-Side Grid Container for Announcements (Vertical) & Schedule -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
                 
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm">
-                        <thead class="bg-slate-100 text-slate-600 font-semibold text-xs uppercase border-b border-slate-200">
-                            <tr>
-                                <th class="p-3">Jam Ke</th>
-                                <th class="p-3">Waktu</th>
-                                <th class="p-3">Mata Pelajaran</th>
-                                <th class="p-3">Guru Pengampu</th>
-                                <th class="p-3">Keterangan</th>
-                            </tr>
-                        </thead>
-                        <tbody id="public-schedule-tbody" class="divide-y divide-slate-100">
-                            <!-- Populated JS -->
-                        </tbody>
-                    </table>
+                <!-- Left Column: Public Announcements Vertical Stack -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <h3 class="font-bold text-slate-800 text-base md:text-lg flex items-center gap-2">
+                            <i class="fa-solid fa-bullhorn text-brand-600"></i> Pengumuman & Agenda
+                        </h3>
+                        <span class="text-[11px] bg-brand-50 text-brand-700 font-bold px-2.5 py-1 rounded-lg">Terbaru</span>
+                    </div>
+                    <div id="public-announcement-list" class="space-y-3 max-h-[500px] overflow-y-auto pr-1 no-scrollbar">
+                        <!-- Populated JS Vertically -->
+                    </div>
                 </div>
-            </div>
 
-            <!-- Public Announcements List -->
-            <div class="space-y-3">
-                <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
-                    <i class="fa-solid fa-newspaper text-brand-600"></i> Pengumuman & Agenda Terbaru
-                </h3>
-                <div id="public-announcement-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <!-- Populated JS -->
+                <!-- Right Column: Public Schedule Section -->
+                <div id="jadwal-public" class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base md:text-lg flex items-center gap-2">
+                                <i class="fa-solid fa-calendar-days text-brand-600"></i> Jadwal Pelajaran
+                            </h3>
+                            <p class="text-[11px] text-slate-500">Jadwal kegiatan belajar mengajar</p>
+                        </div>
+                        <select id="public-day-select" onchange="renderPublicSchedule(this.value)" class="text-xs bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5 font-bold text-slate-700 focus:ring-2 focus:ring-brand-500 outline-none">
+                            <option value="Senin">Senin</option>
+                            <option value="Selasa">Selasa</option>
+                            <option value="Rabu">Rabu</option>
+                            <option value="Kamis">Kamis</option>
+                            <option value="Jumat">Jumat</option>
+                            <option value="Sabtu">Sabtu</option>
+                        </select>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs md:text-sm">
+                            <thead class="bg-slate-50 text-slate-600 font-bold uppercase border-b border-slate-200">
+                                <tr>
+                                    <th class="p-2.5">Jam</th>
+                                    <th class="p-2.5">Waktu</th>
+                                    <th class="p-2.5">Mata Pelajaran</th>
+                                    <th class="p-2.5">Guru Pengampu</th>
+                                </tr>
+                            </thead>
+                            <tbody id="public-schedule-tbody" class="divide-y divide-slate-100">
+                                <!-- Populated JS -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
             </div>
         </section>
 
@@ -249,7 +246,7 @@
                     <p class="font-bold text-slate-700">Akun Akses Masuk Aplikasi:</p>
                     <div class="flex justify-between">
                         <span>Guru Wali Kelas (Admin):</span>
-                        <code class="bg-white px-1.5 py-0.5 rounded border text-brand-700 font-bold">admin</code>
+                        <code class="bg-white px-1.5 py-0.5 rounded border text-brand-700 font-bold">admin / admin@123</code>
                     </div>
                     <div class="flex justify-between">
                         <span>Wali Murid (Member):</span>
@@ -283,7 +280,7 @@
 
             <!-- Admin Stats Row -->
             <div id="admin-stats-row" class="grid grid-cols-2 md:grid-cols-4 gap-4 hidden">
-                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-3 cursor-pointer hover:border-brand-500 transition" onclick="switchView('students')">
                     <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl font-bold">
                         <i class="fa-solid fa-users"></i>
                     </div>
@@ -293,7 +290,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-3 cursor-pointer hover:border-brand-500 transition" onclick="switchView('attendance')">
                     <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl font-bold">
                         <i class="fa-solid fa-user-check"></i>
                     </div>
@@ -303,17 +300,17 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-3 cursor-pointer hover:border-brand-500 transition" onclick="switchView('announcements')">
                     <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl font-bold">
-                        <i class="fa-solid fa-bed"></i>
+                        <i class="fa-solid fa-bullhorn"></i>
                     </div>
                     <div>
-                        <p class="text-xs text-slate-500 font-medium">Sakit / Izin</p>
-                        <p id="stat-sakit-today" class="text-xl font-extrabold text-amber-600">2</p>
+                        <p class="text-xs text-slate-500 font-medium">Pengumuman</p>
+                        <p id="stat-total-pengumuman" class="text-xl font-extrabold text-amber-600">Kelola</p>
                     </div>
                 </div>
 
-                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-3 cursor-pointer hover:border-brand-500 transition" onclick="switchView('documents')">
                     <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center text-xl font-bold">
                         <i class="fa-solid fa-folder-open"></i>
                     </div>
@@ -859,36 +856,40 @@
     </div>
 
     <!-- ================= STICKY GLASS BOTTOM NAVIGATION ================= -->
-    <nav id="bottom-navigation" class="fixed bottom-3 left-1/2 -translate-x-1/2 w-[92%] max-w-md glass-nav rounded-2xl p-2 z-50 flex items-center justify-around shadow-2xl">
-        <button onclick="switchView('landing')" id="nav-landing" class="flex flex-col items-center gap-1 text-brand-600 font-bold transition">
+    <nav id="bottom-navigation" class="fixed bottom-3 left-1/2 -translate-x-1/2 w-[95%] max-w-lg glass-nav rounded-2xl p-2 z-50 flex items-center justify-between gap-1 shadow-2xl overflow-x-auto no-scrollbar">
+        <button onclick="switchView('landing')" id="nav-landing" class="flex flex-col items-center min-w-[48px] gap-1 text-brand-600 font-bold transition">
             <i class="fa-solid fa-house text-lg"></i>
             <span class="text-[10px]">Beranda</span>
         </button>
-        <button onclick="switchView('dashboard')" id="nav-dashboard" class="flex flex-col items-center gap-1 text-slate-400 hover:text-brand-600 font-medium transition">
+        <button onclick="switchView('dashboard')" id="nav-dashboard" class="flex flex-col items-center min-w-[48px] gap-1 text-slate-400 hover:text-brand-600 font-medium transition">
             <i class="fa-solid fa-chart-pie text-lg"></i>
             <span class="text-[10px]">Dashboard</span>
         </button>
-        <button onclick="switchView('schedule')" id="nav-schedule" class="flex flex-col items-center gap-1 text-slate-400 hover:text-brand-600 font-medium transition">
+        <button onclick="switchView('schedule')" id="nav-schedule" class="flex flex-col items-center min-w-[48px] gap-1 text-slate-400 hover:text-brand-600 font-medium transition">
             <i class="fa-solid fa-calendar-days text-lg"></i>
             <span class="text-[10px]">Jadwal</span>
         </button>
-        <button onclick="switchView('students')" id="nav-students" class="flex flex-col items-center gap-1 text-slate-400 hover:text-brand-600 font-medium transition hidden nav-admin">
+        <button onclick="switchView('students')" id="nav-students" class="flex flex-col items-center min-w-[48px] gap-1 text-slate-400 hover:text-brand-600 font-medium transition hidden nav-admin">
             <i class="fa-solid fa-address-book text-lg"></i>
             <span class="text-[10px]">Induk</span>
         </button>
-        <button onclick="switchView('attendance')" id="nav-attendance" class="flex flex-col items-center gap-1 text-slate-400 hover:text-brand-600 font-medium transition hidden nav-admin">
+        <button onclick="switchView('attendance')" id="nav-attendance" class="flex flex-col items-center min-w-[48px] gap-1 text-slate-400 hover:text-brand-600 font-medium transition hidden nav-admin">
             <i class="fa-solid fa-clipboard-user text-lg"></i>
             <span class="text-[10px]">Absensi</span>
         </button>
-        <button onclick="switchView('messages')" id="nav-messages" class="flex flex-col items-center gap-1 text-slate-400 hover:text-brand-600 font-medium transition hidden nav-auth">
+        <button onclick="switchView('announcements')" id="nav-announcements" class="flex flex-col items-center min-w-[48px] gap-1 text-slate-400 hover:text-brand-600 font-medium transition hidden nav-admin">
+            <i class="fa-solid fa-bullhorn text-lg"></i>
+            <span class="text-[10px]">Info</span>
+        </button>
+        <button onclick="switchView('messages')" id="nav-messages" class="flex flex-col items-center min-w-[48px] gap-1 text-slate-400 hover:text-brand-600 font-medium transition hidden nav-auth">
             <i class="fa-solid fa-comments text-lg"></i>
             <span class="text-[10px]">Pesan</span>
         </button>
-        <button onclick="switchView('documents')" id="nav-documents" class="flex flex-col items-center gap-1 text-slate-400 hover:text-brand-600 font-medium transition hidden nav-auth">
+        <button onclick="switchView('documents')" id="nav-documents" class="flex flex-col items-center min-w-[48px] gap-1 text-slate-400 hover:text-brand-600 font-medium transition hidden nav-auth">
             <i class="fa-solid fa-folder-open text-lg"></i>
             <span class="text-[10px]">Berkas</span>
         </button>
-        <button onclick="switchView('settings')" id="nav-settings" class="flex flex-col items-center gap-1 text-slate-400 hover:text-brand-600 font-medium transition hidden nav-admin">
+        <button onclick="switchView('settings')" id="nav-settings" class="flex flex-col items-center min-w-[48px] gap-1 text-slate-400 hover:text-brand-600 font-medium transition hidden nav-admin">
             <i class="fa-solid fa-gear text-lg"></i>
             <span class="text-[10px]">Pengaturan</span>
         </button>
@@ -944,6 +945,7 @@
             renderPublicSchedule("Senin");
             renderPublicAnnouncements();
             updateHeaderProfile();
+            updateNavigationPermissions();
             switchView('landing');
         });
 
@@ -992,91 +994,31 @@
             }
         }
 
-        function renderPublicSchedule(day = "Senin") {
-            const tbody = document.getElementById('public-schedule-tbody');
-            if (!tbody) return;
-            const scheds = mockData.schedules.filter(s => s.hari === day);
-            if (scheds.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-xs text-slate-400">Tidak ada jadwal pelajaran untuk hari ${day}.</td></tr>`;
-                return;
-            }
-            tbody.innerHTML = scheds.map(s => `
-                <tr class="hover:bg-slate-50 transition">
-                    <td class="p-3 font-bold text-slate-800">${s.jam}</td>
-                    <td class="p-3 text-slate-600">${s.waktu}</td>
-                    <td class="p-3 font-bold text-brand-700">${s.mapel}</td>
-                    <td class="p-3 text-slate-600">${s.guru}</td>
-                    <td class="p-3 text-slate-500 text-xs">${s.ket || '-'}</td>
-                </tr>
-            `).join('');
-        }
-
-        function renderPublicAnnouncements() {
-            const container = document.getElementById('public-announcement-list');
-            if (!container) return;
-            if (!mockData.announcements || mockData.announcements.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-400 col-span-2 text-center py-4">Belum ada pengumuman terbaru.</p>`;
-                return;
-            }
-            container.innerHTML = mockData.announcements.map(a => `
-                <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm space-y-2">
-                    <div class="flex justify-between items-center">
-                        <span class="bg-brand-100 text-brand-700 font-bold text-[10px] px-2.5 py-0.5 rounded-full">${a.kategori || 'Informasi'}</span>
-                        <span class="text-[10px] text-slate-400"><i class="fa-regular fa-calendar me-1"></i>${a.tanggal}</span>
-                    </div>
-                    <h4 class="font-bold text-slate-800 text-sm">${a.judul}</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">${a.isi}</p>
-                    <div class="pt-1 text-[10px] text-slate-400 border-t border-slate-100 flex justify-between">
-                        <span>Penulis: ${a.penulis || 'Admin'}</span>
-                    </div>
-                </div>
-            `).join('');
-        }
-
         function updateHeaderProfile() {
-            const container = document.getElementById('user-header-profile');
-            if (!container) return;
-
+            const profileEl = document.getElementById('user-header-profile');
+            if (!profileEl) return;
             if (currentUser) {
-                container.innerHTML = `
-                    <div class="text-right hidden sm:block">
-                        <p class="text-xs font-bold leading-tight">${currentUser.name}</p>
-                        <p class="text-[10px] text-brand-100">${currentUser.role === 'admin' ? 'Guru Wali Kelas' : 'Wali Murid'}</p>
+                profileEl.innerHTML = `
+                    <div class="flex items-center space-x-2 bg-brand-900/40 px-3 py-1.5 rounded-xl border border-white/10">
+                        <div class="w-7 h-7 rounded-full bg-accent-500 text-slate-900 flex items-center justify-center font-bold text-xs shadow">
+                            ${currentUser.name.charAt(0)}
+                        </div>
+                        <div class="hidden sm:block text-left">
+                            <p class="text-xs font-bold leading-none">${currentUser.name}</p>
+                            <p class="text-[10px] text-brand-100 uppercase mt-0.5">${currentUser.role === 'admin' ? 'Guru Wali Kelas' : 'Wali Murid'}</p>
+                        </div>
+                        <button onclick="logout()" class="ml-1 text-red-300 hover:text-red-100 text-xs font-bold p-1 rounded transition" title="Keluar">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </button>
                     </div>
-                    <button onclick="logout()" class="bg-red-500/20 hover:bg-red-500/30 text-white p-2 rounded-xl text-xs transition flex items-center gap-1.5 border border-red-300/30" title="Keluar">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                        <span class="hidden md:inline font-bold">Keluar</span>
-                    </button>
                 `;
             } else {
-                container.innerHTML = `
-                    <button onclick="switchView('login')" class="bg-accent-500 hover:bg-accent-600 text-slate-900 font-bold px-3 py-1.5 rounded-xl text-xs shadow transition flex items-center gap-1.5">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        <span>Masuk</span>
+                profileEl.innerHTML = `
+                    <button onclick="switchView('login')" class="bg-accent-500 hover:bg-accent-600 text-slate-900 font-bold px-3 py-1.5 rounded-xl text-xs transition flex items-center gap-1.5 shadow">
+                        <i class="fa-solid fa-right-to-bracket"></i> <span>Masuk</span>
                     </button>
                 `;
             }
-        }
-
-        function updateNavigationPermissions() {
-            const adminNavs = document.querySelectorAll('.nav-admin');
-            const authNavs = document.querySelectorAll('.nav-auth');
-
-            adminNavs.forEach(el => {
-                if (currentUser && currentUser.role === 'admin') {
-                    el.classList.remove('hidden');
-                } else {
-                    el.classList.add('hidden');
-                }
-            });
-
-            authNavs.forEach(el => {
-                if (currentUser) {
-                    el.classList.remove('hidden');
-                } else {
-                    el.classList.add('hidden');
-                }
-            });
         }
 
         function logout() {
@@ -1086,6 +1028,22 @@
             switchView('landing');
         }
 
+        function updateNavigationPermissions() {
+            const adminNavs = document.querySelectorAll('.nav-admin');
+            const authNavs = document.querySelectorAll('.nav-auth');
+
+            if (!currentUser) {
+                adminNavs.forEach(el => el.classList.add('hidden'));
+                authNavs.forEach(el => el.classList.add('hidden'));
+            } else if (currentUser.role === 'admin') {
+                adminNavs.forEach(el => el.classList.remove('hidden'));
+                authNavs.forEach(el => el.classList.remove('hidden'));
+            } else if (currentUser.role === 'member') {
+                adminNavs.forEach(el => el.classList.add('hidden'));
+                authNavs.forEach(el => el.classList.remove('hidden'));
+            }
+        }
+
         function switchView(viewName) {
             const views = ['landing', 'login', 'dashboard', 'schedule', 'students', 'attendance', 'messages', 'documents', 'announcements', 'settings'];
             views.forEach(v => {
@@ -1093,188 +1051,93 @@
                 if (el) el.classList.add('hidden');
             });
 
+            const navButtons = ['landing', 'dashboard', 'schedule', 'students', 'attendance', 'messages', 'documents', 'announcements', 'settings'];
+            navButtons.forEach(btn => {
+                const navEl = document.getElementById(`nav-${btn}`);
+                if (navEl) {
+                    navEl.classList.remove('text-brand-600', 'font-bold');
+                    navEl.classList.add('text-slate-400', 'font-medium');
+                }
+            });
+
             const targetView = document.getElementById(`view-${viewName}`);
             if (targetView) targetView.classList.remove('hidden');
 
-            const navButtons = document.querySelectorAll('#bottom-navigation button');
-            navButtons.forEach(btn => {
-                btn.classList.remove('text-brand-600', 'font-bold');
-                btn.classList.add('text-slate-400', 'font-medium');
-            });
-
-            const activeNav = document.getElementById(`nav-${viewName}`);
-            if (activeNav) {
-                activeNav.classList.remove('text-slate-400', 'font-medium');
-                activeNav.classList.add('text-brand-600', 'font-bold');
+            const targetNav = document.getElementById(`nav-${viewName}`);
+            if (targetNav) {
+                targetNav.classList.remove('text-slate-400', 'font-medium');
+                targetNav.classList.add('text-brand-600', 'font-bold');
             }
 
-            if (viewName === 'dashboard') renderDashboard();
-            if (viewName === 'schedule') renderScheduleManage('Senin');
-            if (viewName === 'students') renderStudentsTable();
-            if (viewName === 'attendance') renderAttendanceTable();
-            if (viewName === 'messages') renderChatInterface();
-            if (viewName === 'documents') renderDocumentsTable();
-            if (viewName === 'announcements') renderAnnouncementsManage();
-            if (viewName === 'settings') renderSettingsPage();
-        }
-
-        function renderSettingsPage() {
-            if (!currentUser || currentUser.role !== 'admin') {
-                switchView('dashboard');
-                return;
+            if (viewName === 'landing') {
+                renderPublicAnnouncements();
+                renderPublicSchedule(document.getElementById('public-day-select')?.value || 'Senin');
+            } else if (viewName === 'dashboard') {
+                renderDashboard();
+            } else if (viewName === 'schedule') {
+                renderScheduleManage(currentSchedDay);
+            } else if (viewName === 'students') {
+                renderStudentsTable();
+            } else if (viewName === 'attendance') {
+                renderAttendanceTable();
+            } else if (viewName === 'messages') {
+                renderChatInterface();
+            } else if (viewName === 'documents') {
+                renderDocumentsTable();
+            } else if (viewName === 'announcements') {
+                renderAnnouncementsManage();
+            } else if (viewName === 'settings') {
+                populateSettingsForm();
             }
 
-            const st = mockData.settings || {};
-            document.getElementById('set-nama-sekolah').value = st.namaSekolah || "MIN 3 MADIUN";
-            document.getElementById('set-nama-kelas').value = st.namaKelas || "Kelas 5A";
-            document.getElementById('set-tahun-ajaran').value = st.tahunAjaran || "2026/2027";
-            document.getElementById('set-semester').value = st.semester || "Semester 1 (Ganjil)";
-            document.getElementById('set-logo-url').value = st.logoUrl || "";
-        }
-
-        function saveSettingsForm(e) {
-            e.preventDefault();
-            mockData.settings = {
-                namaSekolah: document.getElementById('set-nama-sekolah').value.trim(),
-                namaKelas: document.getElementById('set-nama-kelas').value.trim(),
-                tahunAjaran: document.getElementById('set-tahun-ajaran').value.trim(),
-                semester: document.getElementById('set-semester').value,
-                logoUrl: document.getElementById('set-logo-url').value.trim()
-            };
-
-            saveLocalStore();
-            updateSchoolBranding();
-            alert('Pengaturan sekolah & kelas berhasil disimpan!');
-        }
-
-        function printAttendanceReport() {
-            const st = mockData.settings || {};
-            const selectedMonth = document.getElementById('print-month-filter').value || '2026-08';
-            
-            const rowsHtml = mockData.students.map((s, idx) => {
-                const studentAtt = mockData.attendance.filter(a => a.nisn === s.nisn && a.date.startsWith(selectedMonth));
-                const hadir = studentAtt.filter(a => a.status === 'Hadir').length;
-                const sakit = studentAtt.filter(a => a.status === 'Sakit').length;
-                const izin = studentAtt.filter(a => a.status === 'Izin').length;
-                const alpa = studentAtt.filter(a => a.status === 'Alpa').length;
-
-                return `
-                    <tr>
-                        <td style="text-align: center; padding: 6px; border: 1px solid #cbd5e1;">${idx + 1}</td>
-                        <td style="padding: 6px; border: 1px solid #cbd5e1;">${s.nama}</td>
-                        <td style="text-align: center; padding: 6px; border: 1px solid #cbd5e1;">${s.nisn}</td>
-                        <td style="text-align: center; padding: 6px; border: 1px solid #cbd5e1; color: #16a34a; font-weight: bold;">${hadir}</td>
-                        <td style="text-align: center; padding: 6px; border: 1px solid #cbd5e1; color: #d97706;">${sakit}</td>
-                        <td style="text-align: center; padding: 6px; border: 1px solid #cbd5e1; color: #2563eb;">${izin}</td>
-                        <td style="text-align: center; padding: 6px; border: 1px solid #cbd5e1; color: #dc2626; font-weight: bold;">${alpa}</td>
-                    </tr>
-                `;
-            }).join('');
-
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Rekap Presensi Siswa - ${st.namaSekolah || 'MIN 3 MADIUN'}</title>
-                    <style>
-                        body { font-family: sans-serif; padding: 20px; color: #1e293b; }
-                        .kop { text-align: center; border-bottom: 3px double #000; padding-bottom: 10px; margin-bottom: 20px; }
-                        .kop h2 { margin: 0; font-size: 20px; text-transform: uppercase; }
-                        .kop p { margin: 2px 0; font-size: 12px; }
-                        .meta-table { width: 100%; margin-bottom: 15px; font-size: 12px; }
-                        .data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-                        .data-table th { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 8px; }
-                        .ttd { margin-top: 40px; float: right; width: 220px; text-align: center; font-size: 12px; }
-                    </style>
-                </head>
-                <body>
-                    <div class="kop">
-                        <h2>${st.namaSekolah || 'MIN 3 MADIUN'}</h2>
-                        <p>LAPORAN REKAPITULASI KEHADIRAN SISWA</p>
-                        <p>Tahun Ajaran: ${st.tahunAjaran || '2026/2027'} | ${st.semester || 'Semester 1 (Ganjil)'}</p>
-                    </div>
-
-                    <table class="meta-table">
-                        <tr>
-                            <td><strong>Kelas:</strong> ${st.namaKelas || 'Kelas 5A'}</td>
-                            <td style="text-align: right;"><strong>Periode Bulan:</strong> ${selectedMonth}</td>
-                        </tr>
-                    </table>
-
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th width="5%">No</th>
-                                <th width="35%">Nama Siswa</th>
-                                <th width="20%">NISN</th>
-                                <th width="10%">Hadir</th>
-                                <th width="10%">Sakit</th>
-                                <th width="10%">Izin</th>
-                                <th width="10%">Alpa</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${rowsHtml}
-                        </tbody>
-                    </table>
-
-                    <div class="ttd">
-                        <p>Madiun, ${new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-                        <p>Wali Kelas ${st.namaKelas || '5A'}</p>
-                        <br><br><br>
-                        <p><strong><u>(${currentUser ? currentUser.name : 'Guru Wali Kelas'})</u></strong></p>
-                    </div>
-
-                    <script>
-                        window.onload = function() {
-                            window.print();
-                        }
-                    <\/script>
-                </body>
-                </html>
-            `);
-            printWindow.document.close();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function handleLogin(e) {
             e.preventDefault();
-            const user = document.getElementById('login-username').value.trim();
-            const pass = document.getElementById('login-password').value.trim();
-            const alertBox = document.getElementById('login-alert');
+            const userIn = document.getElementById('login-username').value.trim();
+            const passIn = document.getElementById('login-password').value.trim();
+            const alertEl = document.getElementById('login-alert');
 
-            alertBox.classList.add('hidden');
+            alertEl.classList.add('hidden');
 
-            if (user === 'admin' && pass === 'admin@123') {
-                currentUser = { username: 'admin', name: 'Guru Wali Kelas 5A', role: 'admin', nisn: '' };
-            } else {
-                const studentMatch = mockData.students.find(s => s.nisn === user);
-                if (studentMatch && (pass === user || pass === studentMatch.nisn || pass === 'member@123')) {
-                    currentUser = { 
-                        username: studentMatch.nisn, 
-                        name: `Wali Murid - ${studentMatch.nama}`, 
-                        role: 'member', 
-                        nisn: studentMatch.nisn,
-                        studentData: studentMatch
-                    };
-                } else if (user === 'member' && pass === 'member@123') {
-                    const defaultStudent = mockData.students[0];
-                    currentUser = { 
-                        username: 'member', 
-                        name: `Wali Murid - ${defaultStudent ? defaultStudent.nama : 'Ahmad Fauzi'}`, 
-                        role: 'member', 
-                        nisn: defaultStudent ? defaultStudent.nisn : '1234567890' 
-                    };
-                } else {
-                    alertBox.textContent = 'Login gagal! Untuk Wali Murid gunakan NISN Siswa sebagai Username & Password.';
-                    alertBox.classList.remove('hidden');
-                    return;
-                }
+            // Admin login
+            if (userIn === 'admin' && passIn === 'admin@123') {
+                currentUser = {
+                    id: 'USR-ADMIN',
+                    username: 'admin',
+                    role: 'admin',
+                    name: 'Guru Wali Kelas 5A',
+                    nisn: ''
+                };
+                updateHeaderProfile();
+                updateNavigationPermissions();
+                switchView('dashboard');
+                document.getElementById('login-username').value = '';
+                document.getElementById('login-password').value = '';
+                return;
             }
 
-            updateHeaderProfile();
-            updateNavigationPermissions();
-            switchView('dashboard');
+            // Wali Murid login via NISN
+            const studentMatch = mockData.students.find(s => s.nisn === userIn);
+            if (studentMatch && (passIn === userIn || passIn === 'member@123' || passIn === 'admin@123')) {
+                currentUser = {
+                    id: 'USR-' + studentMatch.nisn,
+                    username: studentMatch.nisn,
+                    role: 'member',
+                    name: `Wali Murid - ${studentMatch.nama}`,
+                    nisn: studentMatch.nisn
+                };
+                updateHeaderProfile();
+                updateNavigationPermissions();
+                switchView('dashboard');
+                document.getElementById('login-username').value = '';
+                document.getElementById('login-password').value = '';
+                return;
+            }
+
+            alertEl.textContent = 'Username / NISN atau Password salah. Silakan coba lagi.';
+            alertEl.classList.remove('hidden');
         }
 
         function renderDashboard() {
@@ -1286,42 +1149,106 @@
             document.getElementById('dash-user-name').textContent = currentUser.name;
             document.getElementById('dash-user-badge').textContent = currentUser.role === 'admin' ? 'Guru Wali Kelas' : 'Wali Murid';
 
-            const adminRow = document.getElementById('admin-stats-row');
-            const memberCard = document.getElementById('member-student-card');
+            const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+            const todayStr = new Date().toLocaleDateString('id-ID', options);
+            document.getElementById('dash-current-date').textContent = todayStr;
+
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const curDay = days[new Date().getDay()] || 'Senin';
+            const dayName = curDay === 'Minggu' ? 'Senin' : curDay;
+            document.getElementById('dash-schedule-day').textContent = dayName;
 
             if (currentUser.role === 'admin') {
-                adminRow.classList.remove('hidden');
-                memberCard.classList.add('hidden');
+                document.getElementById('admin-stats-row').classList.remove('hidden');
+                document.getElementById('member-student-card').classList.add('hidden');
+
                 document.getElementById('stat-total-siswa').textContent = mockData.students.length;
+                
+                const todayDate = new Date().toISOString().split('T')[0];
+                const todayAtt = mockData.attendance.filter(a => a.date === todayDate && a.status === 'Hadir');
+                document.getElementById('stat-hadir-today').textContent = `${todayAtt.length} / ${mockData.students.length}`;
+                document.getElementById('stat-total-pengumuman').textContent = mockData.announcements.length;
                 document.getElementById('stat-total-berkas').textContent = mockData.documents.length;
             } else {
-                adminRow.classList.add('hidden');
-                memberCard.classList.remove('hidden');
-                
-                const child = mockData.students.find(s => s.nisn === currentUser.nisn) || mockData.students[0];
-                document.getElementById('member-child-name').textContent = child.nama;
-                document.getElementById('member-child-nisn').textContent = child.nisn;
+                document.getElementById('admin-stats-row').classList.add('hidden');
+                document.getElementById('member-student-card').classList.remove('hidden');
+
+                const child = mockData.students.find(s => s.nisn === currentUser.nisn);
+                if (child) {
+                    document.getElementById('member-child-name').textContent = child.nama;
+                    document.getElementById('member-child-nisn').textContent = child.nisn;
+
+                    const childAtt = mockData.attendance.filter(a => a.nisn === child.nisn);
+                    const hadirCount = childAtt.filter(a => a.status === 'Hadir').length;
+                    const izinCount = childAtt.filter(a => a.status === 'Sakit' || a.status === 'Izin').length;
+                    const alpaCount = childAtt.filter(a => a.status === 'Alpa').length;
+
+                    document.getElementById('member-child-hadir').textContent = `${hadirCount} Hari`;
+                    document.getElementById('member-child-izin').textContent = `${izinCount} Hari`;
+                    document.getElementById('member-child-alpa').textContent = `${alpaCount} Hari`;
+                }
             }
 
-            const container = document.getElementById('dash-today-schedule-list');
-            const rabuSchedule = mockData.schedules.filter(s => s.hari === 'Rabu');
-            
-            if (rabuSchedule.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-400 py-3 text-center">Tidak ada jadwal hari ini.</p>`;
-            } else {
-                container.innerHTML = rabuSchedule.map(s => `
-                    <div class="py-2.5 flex items-center justify-between text-xs">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-7 h-7 bg-brand-100 text-brand-700 font-bold rounded-lg flex items-center justify-center text-xs">${s.jam}</span>
-                            <div>
-                                <p class="font-bold text-slate-800">${s.mapel}</p>
-                                <p class="text-[10px] text-slate-500">${s.guru}</p>
+            const todayScheds = mockData.schedules.filter(s => s.hari === dayName);
+            const schedListEl = document.getElementById('dash-today-schedule-list');
+            if (schedListEl) {
+                if (todayScheds.length === 0) {
+                    schedListEl.innerHTML = `<p class="text-xs text-slate-400 py-3 text-center">Tidak ada jadwal pelajaran hari ini.</p>`;
+                } else {
+                    schedListEl.innerHTML = todayScheds.map(s => `
+                        <div class="py-2.5 flex items-center justify-between text-xs">
+                            <div class="flex items-center space-x-3">
+                                <span class="w-7 h-7 bg-brand-50 text-brand-700 font-bold rounded-lg flex items-center justify-center text-xs shrink-0">${s.jam}</span>
+                                <div>
+                                    <p class="font-bold text-slate-800">${s.mapel}</p>
+                                    <p class="text-[10px] text-slate-500">${s.guru} • ${s.ket || 'Ruang Kelas'}</p>
+                                </div>
                             </div>
+                            <span class="bg-slate-100 text-slate-600 font-semibold px-2 py-1 rounded-md text-[10px]">${s.waktu}</span>
                         </div>
-                        <span class="bg-slate-100 text-slate-600 px-2 py-1 rounded-md font-medium text-[11px]">${s.waktu}</span>
-                    </div>
-                `).join('');
+                    `).join('');
+                }
             }
+        }
+
+        function renderPublicAnnouncements() {
+            const container = document.getElementById('public-announcement-list');
+            if (!container) return;
+            if (!mockData.announcements || mockData.announcements.length === 0) {
+                container.innerHTML = `<p class="text-xs text-slate-400 text-center py-6">Belum ada pengumuman terbaru.</p>`;
+                return;
+            }
+            container.innerHTML = mockData.announcements.map(a => `
+                <div class="bg-slate-50 hover:bg-emerald-50/50 rounded-xl p-3.5 border border-slate-200 hover:border-brand-300 shadow-sm transition space-y-1.5">
+                    <div class="flex justify-between items-center">
+                        <span class="bg-brand-100 text-brand-800 font-bold text-[10px] px-2 py-0.5 rounded-md">${a.kategori || 'Informasi'}</span>
+                        <span class="text-[10px] text-slate-400 font-medium"><i class="fa-regular fa-calendar me-1"></i>${a.tanggal}</span>
+                    </div>
+                    <h4 class="font-bold text-slate-800 text-xs md:text-sm leading-snug">${a.judul}</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">${a.isi}</p>
+                    <div class="pt-1 text-[10px] text-slate-400 flex justify-between items-center border-t border-slate-200/60 mt-1">
+                        <span>Penulis: <strong class="text-slate-600">${a.penulis || 'Admin'}</strong></span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPublicSchedule(day = "Senin") {
+            const tbody = document.getElementById('public-schedule-tbody');
+            if (!tbody) return;
+            const scheds = mockData.schedules.filter(s => s.hari === day);
+            if (scheds.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-xs text-slate-400">Tidak ada jadwal pelajaran untuk hari ${day}.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = scheds.map(s => `
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="p-2.5 font-bold text-slate-800 text-center bg-slate-50/50 rounded">${s.jam}</td>
+                    <td class="p-2.5 text-slate-600 font-medium text-xs">${s.waktu}</td>
+                    <td class="p-2.5 font-bold text-brand-700">${s.mapel}</td>
+                    <td class="p-2.5 text-slate-600 text-xs">${s.guru}</td>
+                </tr>
+            `).join('');
         }
 
         let currentSchedDay = 'Senin';
@@ -1330,8 +1257,8 @@
             currentSchedDay = day;
             document.querySelectorAll('.sched-day-btn').forEach(btn => {
                 if (btn.textContent.trim() === day) {
-                    btn.classList.add('bg-brand-600', 'text-white');
                     btn.classList.remove('bg-slate-100', 'text-slate-600');
+                    btn.classList.add('bg-brand-600', 'text-white');
                 } else {
                     btn.classList.remove('bg-brand-600', 'text-white');
                     btn.classList.add('bg-slate-100', 'text-slate-600');
@@ -1340,17 +1267,19 @@
             renderScheduleManage(day);
         }
 
-        function renderScheduleManage(day = currentSchedDay) {
+        function renderScheduleManage(day = 'Senin') {
             const tbody = document.getElementById('schedule-manage-tbody');
             if (!tbody) return;
             const scheds = mockData.schedules.filter(s => s.hari === day);
+
             if (scheds.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-xs text-slate-400">Belum ada jadwal untuk hari ${day}. Klik "Tambah Jadwal" untuk menambahkan.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-xs text-slate-400">Belum ada jadwal untuk hari ${day}.</td></tr>`;
                 return;
             }
+
             tbody.innerHTML = scheds.map(s => `
                 <tr class="hover:bg-slate-50 transition">
-                    <td class="p-3 font-bold text-slate-800">${s.jam}</td>
+                    <td class="p-3 font-bold text-slate-800 text-center">${s.jam}</td>
                     <td class="p-3 text-slate-600">${s.waktu}</td>
                     <td class="p-3 font-bold text-brand-700">${s.mapel}</td>
                     <td class="p-3 text-slate-600">${s.guru}</td>
@@ -1616,6 +1545,7 @@
         }
 
         let activeChatNisn = "1234567890";
+
         function renderChatInterface() {
             const listContainer = document.getElementById('chat-student-list-box');
             const chatMainBox = document.getElementById('chat-main-box');
@@ -1873,6 +1803,124 @@
                 renderAnnouncementsManage();
                 renderPublicAnnouncements();
             }
+        }
+
+        function populateSettingsForm() {
+            const st = mockData.settings || {};
+            document.getElementById('set-nama-sekolah').value = st.namaSekolah || 'MIN 3 MADIUN';
+            document.getElementById('set-nama-kelas').value = st.namaKelas || 'Kelas 5A';
+            document.getElementById('set-tahun-ajaran').value = st.tahunAjaran || '2026/2027';
+            document.getElementById('set-semester').value = st.semester || 'Semester 1 (Ganjil)';
+            document.getElementById('set-logo-url').value = st.logoUrl || '';
+        }
+
+        function saveSettingsForm(e) {
+            e.preventDefault();
+            mockData.settings = {
+                namaSekolah: document.getElementById('set-nama-sekolah').value.trim(),
+                namaKelas: document.getElementById('set-nama-kelas').value.trim(),
+                tahunAjaran: document.getElementById('set-tahun-ajaran').value.trim(),
+                semester: document.getElementById('set-semester').value,
+                logoUrl: document.getElementById('set-logo-url').value.trim()
+            };
+            saveLocalStore();
+            updateSchoolBranding();
+            alert('Pengaturan sekolah & kelas berhasil disimpan!');
+        }
+
+        function printAttendanceReport() {
+            const monthVal = document.getElementById('print-month-filter').value || '2026-08';
+            const st = mockData.settings || {};
+
+            const printWin = window.open('', '_blank');
+            if (!printWin) {
+                alert('Mohon izinkan pop-up window pada browser Anda untuk mencetak.');
+                return;
+            }
+
+            const rowsHtml = mockData.students.map((s, idx) => {
+                const childAtt = mockData.attendance.filter(a => a.nisn === s.nisn && a.date.startsWith(monthVal));
+                const hadir = childAtt.filter(a => a.status === 'Hadir').length;
+                const sakit = childAtt.filter(a => a.status === 'Sakit').length;
+                const izin = childAtt.filter(a => a.status === 'Izin').length;
+                const alpa = childAtt.filter(a => a.status === 'Alpa').length;
+                const total = childAtt.length || 1;
+                const pct = Math.round((hadir / total) * 100);
+
+                return `
+                    <tr>
+                        <td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${idx + 1}</td>
+                        <td style="padding:6px; border:1px solid #cbd5e1;"><strong>${s.nama}</strong></td>
+                        <td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${s.nisn}</td>
+                        <td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${hadir}</td>
+                        <td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${sakit}</td>
+                        <td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${izin}</td>
+                        <td style="text-align:center; padding:6px; border:1px solid #cbd5e1;">${alpa}</td>
+                        <td style="text-align:center; padding:6px; border:1px solid #cbd5e1;"><strong>${pct}%</strong></td>
+                    </tr>
+                `;
+            }).join('');
+
+            printWin.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Laporan Rekap Presensi - ${st.namaSekolah || 'MIN 3 MADIUN'}</title>
+                    <style>
+                        body { font-family: sans-serif; padding: 20px; color: #1e293b; }
+                        .header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
+                        .header h2 { margin: 0; font-size: 18px; text-transform: uppercase; }
+                        .header h3 { margin: 5px 0 0 0; font-size: 14px; font-weight: normal; }
+                        table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 15px; }
+                        th { background-color: #f1f5f9; padding: 8px; border: 1px solid #cbd5e1; text-transform: uppercase; font-size: 11px; }
+                        .footer { margin-top: 40px; display: flex; justify-content: space-between; font-size: 12px; }
+                        @media print { body { padding: 0; } }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h2>${st.namaSekolah || 'MIN 3 MADIUN'}</h2>
+                        <h3>LAPORAN REKAPITULASI PRESENSI SISWA</h3>
+                        <p style="font-size:12px; margin:5px 0 0 0;">Kelas: ${st.namaKelas || '5A'} | Tahun Ajaran: ${st.tahunAjaran || '2026/2027'} | Periode: ${monthVal}</p>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Siswa</th>
+                                <th>NISN</th>
+                                <th>Hadir</th>
+                                <th>Sakit</th>
+                                <th>Izin</th>
+                                <th>Alpa</th>
+                                <th>Kehadiran (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${rowsHtml}
+                        </tbody>
+                    </table>
+                    <div class="footer">
+                        <div>
+                            <p>Mengetahui,</p>
+                            <p>Kepala Madrasah</p>
+                            <br><br><br>
+                            <p>_______________________</p>
+                        </div>
+                        <div>
+                            <p>Madiun, ${new Date().toLocaleDateString('id-ID')}</p>
+                            <p>Wali Kelas ${st.namaKelas || '5A'}</p>
+                            <br><br><br>
+                            <p><strong>Ahmad, S.Pd.</strong></p>
+                        </div>
+                    </div>
+                    <script>
+                        window.onload = function() { window.print(); }
+                    <\/script>
+                </body>
+                </html>
+            `);
+            printWin.document.close();
         }
 
         function closeModal(modalId) {
